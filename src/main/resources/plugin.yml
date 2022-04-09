@@ -1,0 +1,10 @@
+name: MainMCPlugin
+version: '${project.version}'
+main: com.evangreener.mainmcplugin.MainMCPlugin
+api-version: 1.16
+authors: [ EvanGreener ]
+description: The main server plugin for my mc server
+commands:
+  cmds:
+    description: List server specific commands
+    usage: /cmds
