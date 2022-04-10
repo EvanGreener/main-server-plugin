@@ -6,5 +6,9 @@ authors: [ EvanGreener ]
 description: The main server plugin for my mc server
 commands:
   cmds:
+    usage: /cmds | /cmds help
     description: List server specific commands
-    usage: /cmds
+
+  tp-spawn:
+    usage: /tp-spawn
+    description: Teleport to world spawn
