@@ -32,14 +32,17 @@ public class FeedSpiderListener implements Listener {
         Entity damagee = e.getEntity();
         if (damager instanceof Player && damagee instanceof Spider) {
             Player player = (Player) damager;
-            // Check if the player attacked with rotten flesh in main hand
+            Spider spider =  (Spider) damagee;
+            // Check if the player attacked with rotten flesh in main hand and that the spider is not
+            // someone else's pet
             Material itemInMainHand = player.getInventory().getItemInMainHand().getType();
-            if (itemInMainHand == Material.ROTTEN_FLESH) {
+            boolean hasOwner = spider.getMetadata(MainMCPlugin.PET_OWNER_KEY).get(0).asString().equals(player.getDisplayName());
+            if (itemInMainHand == Material.ROTTEN_FLESH && !hasOwner) {
                 // Cancel event
                 e.setCancelled(true);
                 // Pretend that spider ate the rotten flesh by replacing it with air (nothing)
                 player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
-                Spider spider =  (Spider) damagee;
+
                 //Turn the spider into a pet that will fight other mobs
                 claimSpider(player, spider);
             }
@@ -50,7 +53,7 @@ public class FeedSpiderListener implements Listener {
     private void claimSpider(Player player, Spider spider) {
         String owner = player.getDisplayName();
         spider.playEffect(EntityEffect.LOVE_HEARTS);
-        spider.setMetadata("petOwner]", new FixedMetadataValue(mainMCPlugin, owner));
+        spider.setMetadata(MainMCPlugin.PET_OWNER_KEY, new FixedMetadataValue(mainMCPlugin, owner));
         spider.setCustomName(owner + "'s spider");
         spider.setCustomNameVisible(true);
     }

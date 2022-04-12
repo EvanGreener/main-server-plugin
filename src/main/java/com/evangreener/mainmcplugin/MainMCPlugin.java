@@ -11,6 +11,8 @@ import java.util.Objects;
 
 public final class MainMCPlugin extends JavaPlugin {
 
+    public static final String PET_OWNER_KEY = "petOwner";
+
     @Override
     public void onEnable() {
         // Assign commands to their executor classes
