@@ -19,11 +19,13 @@ public class CmdsCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0 || args[0].equals("help")) {
+            // Obtain the Entry set of commands described in the plugin.yml
             var commandList = mainMCPlugin.getDescription().getCommands().entrySet();
             sender.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.STRIKETHROUGH +
                     "-----------------------------------------------------");
-            for (Map.Entry<String, Map<String, Object>> entry : commandList) {
-                var cmdProperties = entry.getValue();
+            // Iterate through all the commands and send usage and description of the commands to the player
+            for (Map.Entry<String, Map<String, Object>> cmd : commandList) {
+                var cmdProperties = cmd.getValue();
                 String usage = (String) cmdProperties.get("usage");
                 String description = (String) cmdProperties.get("description");
                 sender.sendMessage(ChatColor.LIGHT_PURPLE + usage + " - " + ChatColor.WHITE + description);

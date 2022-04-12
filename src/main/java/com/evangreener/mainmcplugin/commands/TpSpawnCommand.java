@@ -13,7 +13,7 @@ public class TpSpawnCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
             Player player = (Player) sender;
-            Location spawn = player.getWorld().getSpawnLocation();
+            Location spawn = player.getWorld().getSpawnLocation(); //Get world spawn location
             player.teleport(spawn);
         }
         return true;
